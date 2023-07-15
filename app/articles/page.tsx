@@ -97,7 +97,7 @@ export default async function Articles() {
                 </CardHeader>
                 <CardContent>
                   <div className="prose text-zinc-400 duration-150 group-hover:text-zinc-300">
-                    <PortableText value={recentArticle.tldr} />
+                    <PortableText value={article.tldr} />
                   </div>
                 </CardContent>
                 <CardFooter>

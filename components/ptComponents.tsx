@@ -58,12 +58,11 @@ export const ptComponents = {
     ),
   },
   types: {
-    code: ({ value, ...rest }: any) => {
+    code: ({ value }: any) => {
       if (!value?.code) {
         return null
       }
 
-      console.log(rest)
       return (
         <Refractor
           language={'js'}

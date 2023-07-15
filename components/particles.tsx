@@ -7,7 +7,7 @@ import type { Container, Engine } from 'tsparticles-engine'
 
 export const ParticlesWrapper = () => {
   const particlesInit = useCallback(async (engine: Engine) => {
-    console.log(engine)
+    // console.log(engine)
 
     // you can initialize the tsParticles instance (engine) here, adding custom shapes or presets
     // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
@@ -17,7 +17,7 @@ export const ParticlesWrapper = () => {
 
   const particlesLoaded = useCallback(
     async (container: Container | undefined) => {
-      await console.log(container)
+      // await console.log(container)
     },
     []
   )
