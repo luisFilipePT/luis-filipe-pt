@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { siteConfig } from '@/siteConfig'
 import { ArrowLeft } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -35,18 +36,15 @@ export const Navigation: React.FC<NavigationProps> = ({ fixed = true }) => {
       <div className={cn(fixed ? fixedClasses : '')}>
         <div className="container mx-auto flex flex-row-reverse items-center justify-between p-6 text-sm sm:text-base">
           <div className="flex justify-between gap-4 text-zinc-300 md:gap-8">
-            <Link href="/projects" className="duration-200 hover:text-zinc-100">
-              Projects
-            </Link>
-            <Link href="/about" className="duration-200 hover:text-zinc-100">
-              About
-            </Link>
-            <Link href="/contact" className="duration-200 hover:text-zinc-100">
-              Contact
-            </Link>
-            <Link href="/articles" className="duration-200 hover:text-zinc-100">
-              Articles
-            </Link>
+            {siteConfig.navigation.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="duration-200 hover:text-zinc-100"
+              >
+                {item.name}
+              </Link>
+            ))}
           </div>
           <Link
             href="/"

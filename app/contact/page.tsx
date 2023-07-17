@@ -1,25 +1,26 @@
+import { ReactElement } from 'react'
 import Link from 'next/link'
 import { cachedClient } from '@/sanity/lib/client'
-import { socialsQuery } from '@/sanity/lib/queries'
+import { socialsQuery, type SocialsQuery } from '@/sanity/lib/queries'
 import { Github, Linkedin, Twitter } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { Navigation } from '@/components/nav'
 
-const Icons: Record<string, any> = {
+const Icons: Record<string, ReactElement> = {
   github: <Github size={20} />,
   twitter: <Twitter size={20} />,
   linkedin: <Linkedin size={20} />,
 }
 
 export default async function Contact() {
-  const socials = await cachedClient(socialsQuery)
+  const socials = await cachedClient<SocialsQuery>(socialsQuery)
 
   return (
-    <div className="bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0">
+    <main className="bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0">
       <Navigation />
       <div className="container mx-auto flex min-h-screen items-center justify-center px-4">
-        <div className="mx-auto mt-32 grid w-full grid-cols-1 gap-8 sm:mt-0 sm:grid-cols-3 lg:gap-16">
-          {socials.map((s: { label: string; link: string; handle: string }) => (
+        <section className="mx-auto mt-32 grid w-full grid-cols-1 gap-8 sm:mt-0 sm:grid-cols-3 lg:gap-16">
+          {socials.map((s) => (
             <Card>
               <Link
                 href={s.link}
@@ -32,7 +33,7 @@ export default async function Contact() {
                 />
                 <span className="drop-shadow-orange relative z-10 flex h-12 w-12 items-center justify-center rounded-full border border-zinc-500 bg-zinc-900 text-sm text-zinc-200 duration-1000 group-hover:border-zinc-200 group-hover:bg-zinc-900 group-hover:text-white">
                   {Icons[s.label.toLowerCase()]}
-                </span>{' '}
+                </span>
                 <div className="z-10 flex flex-col items-center">
                   <span className="font-display text-xl font-medium text-zinc-200 duration-150 group-hover:text-white lg:text-3xl">
                     {s.handle}
@@ -44,8 +45,8 @@ export default async function Contact() {
               </Link>
             </Card>
           ))}
-        </div>
+        </section>
       </div>
-    </div>
+    </main>
   )
 }

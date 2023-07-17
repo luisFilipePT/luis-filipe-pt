@@ -1,19 +1,13 @@
 import Link from 'next/link'
+import { siteConfig } from '@/siteConfig'
 import { ParticlesWrapper } from '@/components/particles'
-
-const navigation = [
-  { name: 'Projects', href: '/projects' },
-  { name: 'About', href: '/about' },
-  { name: 'Contact', href: '/contact' },
-  { name: 'Articles', href: '/articles' },
-]
 
 export default function Home() {
   return (
     <main className="flex h-screen w-screen flex-col items-center justify-center overflow-hidden bg-gradient-to-tl from-black via-zinc-600/20 to-black">
       <nav className="my-16 animate-fade-in">
         <ul className="flex items-center justify-center gap-4">
-          {navigation.map((item) => (
+          {siteConfig.navigation.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -29,12 +23,12 @@ export default function Home() {
         <ParticlesWrapper />
       </div>
       <h1 className="duration-1500 z-10 animate-title cursor-default whitespace-nowrap bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-200 via-gray-400 to-gray-600 bg-clip-text font-display text-6xl text-transparent md:text-[140px]">
-        luisFilipePT
+        {siteConfig.name}
       </h1>
       <div className="animate-glow hidden h-px w-screen animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0 md:block" />
       <div className="mx-4 my-16 animate-fade-in text-center">
         <h2 className="text-sm text-zinc-500 md:max-w-2xl md:text-base">
-          Hi, my name is Luís. I&apos;m crafting user experiences supported by
+          Hi, my name is Luís. I{"'"}m crafting user experiences supported by
           data to solve real problems at{' '}
           <Link
             target="_blank"

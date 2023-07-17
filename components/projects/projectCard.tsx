@@ -27,7 +27,10 @@ export function ProjectCard({ project, showImage = false }: any) {
               src={urlForImage(project.image)?.url()}
               fill={true}
               alt={`${project.title} image`}
+              placeholder="blur"
+              blurDataURL={project.image.asset.metadata.lqip}
               priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
         ) : null}

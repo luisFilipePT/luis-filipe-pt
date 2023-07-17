@@ -1,9 +1,14 @@
+import { ISocial } from '@/sanity/schemas/social'
 import { groq } from 'next-sanity'
 
 // Get all social channels
 export const socialsQuery = groq`*[_type == "social"]{
     _id, label, handle, link
   }`
+
+export type SocialsQuery = Readonly<
+  Pick<ISocial, '_id' | 'label' | 'handle' | 'link'>
+>[]
 
 /**
  *  /$$$$$$$                                               /$$
@@ -21,7 +26,12 @@ export const socialsQuery = groq`*[_type == "social"]{
 
 // Get all work projects
 export const workProjectsQuery = groq`*[_type == "project" && type == "work"]{
-    _id, title, subtitle, slug, image, summary, relevance
+    _id, title, subtitle, slug, summary, relevance, image {
+    asset-> {
+        ...,
+        metadata
+      }
+    }
   } | order(relevance asc)`
 
 // Get all created projects

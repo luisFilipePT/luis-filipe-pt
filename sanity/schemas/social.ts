@@ -1,5 +1,13 @@
 import { defineField, defineType } from 'sanity'
 
+export interface ISocial {
+  _id: string
+  _type: 'social'
+  label: string
+  handle: string
+  link: string
+}
+
 export default defineType({
   name: 'social',
   title: 'Social',
