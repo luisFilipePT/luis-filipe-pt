@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /studio/
+Sitemap: https://www.luisfilipept.com/sitemap.xml

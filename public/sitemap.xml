@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+
+<url>
+  <loc>https://www.luisfilipept.com/</loc>
+  <lastmod>2023-07-26T15:02:18+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://www.luisfilipept.com/projects</loc>
+  <lastmod>2023-07-26T15:02:18+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.luisfilipept.com/about</loc>
+  <lastmod>2023-07-26T15:02:18+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.luisfilipept.com/contact</loc>
+  <lastmod>2023-07-26T15:02:18+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.luisfilipept.com/articles</loc>
+  <lastmod>2023-07-26T15:02:18+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.luisfilipept.com/projects/farfetch-com</loc>
+  <lastmod>2023-07-26T15:02:18+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.luisfilipept.com/projects/chemondis-com</loc>
+  <lastmod>2023-07-26T15:02:18+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.luisfilipept.com/projects/wtx-com</loc>
+  <lastmod>2023-07-26T15:02:18+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.luisfilipept.com/projects/dreamfootball-com</loc>
+  <lastmod>2023-07-26T15:02:18+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.luisfilipept.com/projects/yesaccount-fr</loc>
+  <lastmod>2023-07-26T15:02:18+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.luisfilipept.com/projects/franke-com</loc>
+  <lastmod>2023-07-26T15:02:18+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.luisfilipept.com/articles/maximising-the-effectiveness-of-your-pull-requests</loc>
+  <lastmod>2023-07-26T15:02:18+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.luisfilipept.com/articles/having-beer-with-oop-and-fp</loc>
+  <lastmod>2023-07-26T15:02:18+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>
