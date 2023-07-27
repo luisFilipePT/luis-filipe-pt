@@ -1,3 +1,5 @@
+import '../style/codeTheme.css'
+
 import Image from 'next/image'
 import { client } from '@/sanity/lib/client'
 import { getImageDimensions } from '@sanity/asset-utils'

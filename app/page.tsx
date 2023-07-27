@@ -8,13 +8,14 @@ export default function Home() {
       <nav className="my-16 animate-fade-in">
         <ul className="flex items-center justify-center gap-4">
           {siteConfig.navigation.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-sm text-zinc-500 duration-500 hover:text-zinc-300 md:text-base"
-            >
-              {item.name}
-            </Link>
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                className="text-sm text-zinc-500 duration-500 hover:text-zinc-300 md:text-base"
+              >
+                {item.name}
+              </Link>
+            </li>
           ))}
         </ul>
       </nav>
@@ -32,6 +33,7 @@ export default function Home() {
           data to solve real problems at{' '}
           <Link
             target="_blank"
+            rel="noopener"
             href="https://xgeeks.io/"
             className="underline duration-500 hover:text-zinc-300"
           >

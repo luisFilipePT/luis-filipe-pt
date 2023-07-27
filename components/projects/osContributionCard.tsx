@@ -22,7 +22,7 @@ export function OpenSourceContributionCard({ contribution }: any) {
               alt="ReatJs logo"
               className="mr-2.5 rounded"
             />
-            <Link href={contribution.link} target="_blank">
+            <Link href={contribution.link} target="_blank" rel="noopener">
               {contribution.link}
             </Link>
           </div>

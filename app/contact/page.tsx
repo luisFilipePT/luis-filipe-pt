@@ -25,6 +25,7 @@ export default async function Contact() {
               <Link
                 href={s.link}
                 target="_blank"
+                rel="noopener"
                 className="group relative flex flex-col items-center gap-4 p-4 duration-700 md:gap-8 md:p-16  md:py-24  lg:pb-48"
               >
                 <span

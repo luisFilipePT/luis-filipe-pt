@@ -14,7 +14,7 @@ export function OpenSourceProjectCard({ project }: any) {
       <CardHeader>
         <CardTitle>{project.title}</CardTitle>
         <CardDescription>
-          <Link href={project.url} target="_blank">
+          <Link href={project.url} target="_blank" rel="noopener">
             {project.subtitle}
           </Link>
         </CardDescription>
