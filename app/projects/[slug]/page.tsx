@@ -43,7 +43,8 @@ export default async function Article({ params }: { params: any }) {
               className="object-contain"
               src={urlForImage(project.image)?.url()}
               fill={true}
-              alt={project?.image?.alt}
+              priority
+              alt={project?.image?.alt || 'Project website screenshot'}
             />
           </div>
         ) : null}

@@ -2,31 +2,27 @@
 
 import { useCallback } from 'react'
 import Particles from 'react-particles'
-import { loadFull } from 'tsparticles'
-import type { Container, Engine } from 'tsparticles-engine'
+import { loadSlim } from 'tsparticles-slim'
 
 export const ParticlesWrapper = () => {
-  const particlesInit = useCallback(async (engine: Engine) => {
+  const particlesInit = useCallback(async (engine: any) => {
     // console.log(engine)
-
-    // you can initialize the tsParticles instance (engine) here, adding custom shapes or presets
+    // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
     // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
     // starting from v2 you can add only the features you need reducing the bundle size
-    await loadFull(engine)
+    //await loadFull(engine);
+    await loadSlim(engine)
   }, [])
 
-  const particlesLoaded = useCallback(
-    async (container: Container | undefined) => {
-      // await console.log(container)
-    },
-    []
-  )
+  // const particlesLoaded = useCallback(async (container: any) => {
+  //  await console.log(container)
+  //}, [])
 
   return (
     <Particles
       id="tsparticles"
       init={particlesInit}
-      loaded={particlesLoaded}
+      //loaded={particlesLoaded}
       options={{
         fpsLimit: 120,
         interactivity: {
