@@ -1,7 +1,23 @@
-import { ISocial } from '@/sanity/schemas/social'
+import { type IContribution } from '@/sanity/schemas/contribution'
+import { type IPage } from '@/sanity/schemas/page'
+import { type IProject } from '@/sanity/schemas/project'
+import { type ISocial } from '@/sanity/schemas/social'
 import { groq } from 'next-sanity'
 
-// Get all social channels
+/**
+ *   /$$$$$$                      /$$           /$$
+ *  /$$__  $$                    |__/          | $$
+ * | $$  \__/  /$$$$$$   /$$$$$$$ /$$  /$$$$$$ | $$  /$$$$$$$
+ * |  $$$$$$  /$$__  $$ /$$_____/| $$ |____  $$| $$ /$$_____/
+ *  \____  $$| $$  \ $$| $$      | $$  /$$$$$$$| $$|  $$$$$$
+ *  /$$  \ $$| $$  | $$| $$      | $$ /$$__  $$| $$ \____  $$
+ * |  $$$$$$/|  $$$$$$/|  $$$$$$$| $$|  $$$$$$$| $$ /$$$$$$$/
+ *  \______/  \______/  \_______/|__/ \_______/|__/|_______/
+ */
+
+/**
+ * Get all social channels
+ */
 export const socialsQuery = groq`*[_type == "social"]{
     _id, label, handle, link
   }`
@@ -24,7 +40,9 @@ export type SocialsQuery = Readonly<
  *                         \______/
  */
 
-// Get all work projects
+/**
+ * All work projects
+ */
 export const workProjectsQuery = groq`*[_type == "project" && type == "work"]{
     _id, title, subtitle, slug, summary, relevance, image {
     asset-> {
@@ -34,17 +52,41 @@ export const workProjectsQuery = groq`*[_type == "project" && type == "work"]{
     }
   } | order(relevance asc)`
 
-// Get all created projects
+export type WorkProjectsQuery = Readonly<
+  Pick<
+    IProject,
+    '_id' | 'title' | 'subtitle' | 'slug' | 'summary' | 'relevance' | 'image'
+  >
+>[]
+
+/**
+ * Open source projects, projects created or heavily contributed to
+ */
 export const openSourceProjectsQuery = groq`*[_type == "project" && type == "creation"]{
     _id, title, subtitle, summary, slug, url, relevance
   } | order(relevance asc)`
 
-// Get all contributions
+export type OpenSourceProjectsQuery = Readonly<
+  Pick<
+    IProject,
+    '_id' | 'title' | 'subtitle' | 'slug' | 'summary' | 'relevance' | 'url'
+  >
+>[]
+
+/**
+ * All "minor" contributions to open source projects
+ */
 export const contributionsQuery = groq`*[_type == "contribution"]{
     _id, label, description, logo, link
   }`
 
-// Get a single article by its slug
+export type ContributionsQuery = Readonly<
+  Pick<IContribution, '_id' | 'label' | 'description' | 'logo' | 'link'>
+>[]
+
+/**
+ * Single project
+ */
 export const projectQuery = groq`*[_type == "project" && slug.current == $slug][0]{ 
     _id,       
     slug,
@@ -57,7 +99,9 @@ export const projectQuery = groq`*[_type == "project" && slug.current == $slug][
     publishedAt,
   }`
 
-// Get all article slugs
+/**
+ * All project slugs
+ */
 export const projectPathsQuery = groq`*[_type == "project" && defined(slug.current)][]{
     "params": { "slug": slug.current }
   }`
@@ -76,10 +120,57 @@ export const projectPathsQuery = groq`*[_type == "project" && defined(slug.curre
  *                     \______/
  */
 
-// Get About Page
-export const aboutPageQuery = groq`*[_type == "page" && slug.current == "about"][0]{
-    _id, pageTitle, image, slug, description, contentIntro, contentDescription, pageBuilder
+/**
+ * Home page
+ */
+export const homePageQuery = groq`*[_type == "pageV2" && slug.current == "home"][0]{
+    _id, title, description[]{
+      ...,
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          "slug": @.reference->slug
+        }
+      }
+    }
   }`
+
+export type HomePageQuery = Readonly<
+  Pick<IPage, '_id' | 'title' | 'description'>
+>
+
+/**
+ * Projects page
+ */
+export const projectsPageQuery = groq`*[_type == "pageV2" && slug.current == "projects"][0]{
+    _id, title, description
+  }`
+
+export type ProjectsPageQuery = Readonly<
+  Pick<IPage, '_id' | 'title' | 'description'>
+>
+
+/**
+ * About page
+ */
+export const aboutPageQuery = groq`*[_type == "pageV2" && slug.current == "about"][0]{
+    _id, title, description, image, sections
+  }`
+
+export type AboutPageQuery = Readonly<
+  Pick<IPage, '_id' | 'title' | 'description' | 'image' | 'sections'>
+>
+
+/**
+ * Navigation
+ */
+export const navigationQuery = groq`*[_type == "pageV2" && slug.current != "home"] {
+    "slug": slug.current
+  }`
+
+export type NavigationQuery = {
+  slug: string
+}[]
 
 /**
  *   /$$$$$$              /$$     /$$           /$$
@@ -92,7 +183,9 @@ export const aboutPageQuery = groq`*[_type == "page" && slug.current == "about"]
  * |__/  |__/|__/         \___/  |__/ \_______/|__/ \_______/|_______/
  */
 
-// Get all posts
+/**
+ * All articles
+ */
 export const articlesQuery = groq`*[_type == "article" && defined(slug.current)]{
     _id,       
     slug,
@@ -103,7 +196,9 @@ export const articlesQuery = groq`*[_type == "article" && defined(slug.current)]
     mainImage,
   } | order(publishedAt desc) [0...3]`
 
-// Get a single article by its slug
+/**
+ * Single article
+ */
 export const articleQuery = groq`*[_type == "article" && slug.current == $slug][0]{ 
     _id,       
     slug,
@@ -115,7 +210,9 @@ export const articleQuery = groq`*[_type == "article" && slug.current == $slug][
     mainImage,
   }`
 
-// Get all article slugs
+/**
+ * All article slugs
+ */
 export const articlePathsQuery = groq`*[_type == "article" && defined(slug.current)][]{
     "params": { "slug": slug.current }
   }`

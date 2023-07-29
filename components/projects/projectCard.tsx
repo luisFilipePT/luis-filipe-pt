@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { urlForImage } from '@/sanity/lib/image'
+import { type IProject } from '@/sanity/schemas/project'
 import { PortableText } from '@portabletext/react'
 import { MoveRight } from 'lucide-react'
 import {
@@ -12,7 +13,17 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 
-export function ProjectCard({ project, showImage = false }: any) {
+type ProjectCardProps = {
+  project: Readonly<
+    Pick<
+      IProject,
+      '_id' | 'title' | 'subtitle' | 'slug' | 'summary' | 'relevance' | 'image'
+    >
+  >
+  showImage?: boolean
+}
+
+export function ProjectCard({ project, showImage = false }: ProjectCardProps) {
   return (
     <Card>
       <CardHeader>
@@ -28,7 +39,7 @@ export function ProjectCard({ project, showImage = false }: any) {
               fill={true}
               alt={`${project.title} image`}
               placeholder="blur"
-              blurDataURL={project.image.asset.metadata.lqip}
+              blurDataURL={project.image.asset?.metadata.lqip}
               priority
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />

@@ -1,19 +1,32 @@
 import Link from 'next/link'
-import { siteConfig } from '@/siteConfig'
+import { cachedClient } from '@/sanity/lib/client'
+import {
+  homePageQuery,
+  navigationQuery,
+  type HomePageQuery,
+  type NavigationQuery,
+} from '@/sanity/lib/queries'
+import { PortableText } from '@portabletext/react'
+import { capitalize, sortNavigation } from '@/lib/utils'
 import { ParticlesWrapper } from '@/components/particles'
 
-export default function Home() {
+export default async function Home() {
+  const [page, navigation] = await Promise.all([
+    cachedClient<HomePageQuery>(homePageQuery),
+    cachedClient<NavigationQuery>(navigationQuery),
+  ])
+
   return (
     <main className="flex h-screen w-screen flex-col items-center justify-center overflow-hidden bg-gradient-to-tl from-black via-zinc-600/20 to-black">
       <nav className="my-16 animate-fade-in">
         <ul className="flex items-center justify-center gap-4">
-          {siteConfig.navigation.map((item) => (
-            <li key={item.href}>
+          {navigation.sort(sortNavigation).map(({ slug }) => (
+            <li key={slug}>
               <Link
-                href={item.href}
+                href={`/${slug}`}
                 className="text-sm text-zinc-500 duration-500 hover:text-zinc-300 md:text-base"
               >
-                {item.name}
+                {capitalize(slug)}
               </Link>
             </li>
           ))}
@@ -24,30 +37,49 @@ export default function Home() {
         <ParticlesWrapper />
       </div>
       <h1 className="duration-1500 z-10 animate-title cursor-default whitespace-nowrap bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-200 via-gray-400 to-gray-600 bg-clip-text font-display text-6xl text-transparent md:text-[140px]">
-        {siteConfig.name}
+        {page.title}
       </h1>
       <div className="animate-glow hidden h-px w-screen animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0 md:block" />
       <div className="mx-4 my-16 animate-fade-in text-center">
-        <h2 className="text-sm text-zinc-500 md:max-w-2xl md:text-base">
-          Hi, my name is Luís. I{"'"}m crafting user experiences supported by
-          data to solve real problems at{' '}
-          <Link
-            target="_blank"
-            rel="noopener"
-            href="https://xgeeks.io/"
-            className="underline duration-500 hover:text-zinc-300"
-          >
-            xgeeks
-          </Link>{' '}
-          and working on{' '}
-          <Link
-            href="./projects"
-            className="underline duration-500 hover:text-zinc-300"
-          >
-            open source
-          </Link>{' '}
-          at night.
-        </h2>
+        <PortableText
+          value={page.description}
+          components={{
+            block: {
+              h2: ({ children }: any) => (
+                <h2 className="text-sm text-zinc-500 md:max-w-2xl md:text-base">
+                  {children}
+                </h2>
+              ),
+            },
+            marks: {
+              link: ({ children, value }) => {
+                const rel = value.href.startsWith('/') ? undefined : 'noopener'
+                return (
+                  <Link
+                    href={value.href}
+                    rel={rel}
+                    className="underline duration-500 hover:text-zinc-300"
+                  >
+                    {children}
+                  </Link>
+                )
+              },
+              internalLink: ({ value, children }) => {
+                const { slug = {} } = value
+                const href = `/${slug.current}`
+
+                return (
+                  <Link
+                    href={href}
+                    className="underline duration-500 hover:text-zinc-300"
+                  >
+                    {children}
+                  </Link>
+                )
+              },
+            },
+          }}
+        />
       </div>
     </main>
   )

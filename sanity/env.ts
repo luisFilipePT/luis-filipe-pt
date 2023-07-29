@@ -1,5 +1,3 @@
-import tremor from 'refractor/lang/tremor'
-
 export const apiVersion =
   process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2023-07-06'
 
@@ -13,7 +11,7 @@ export const projectId = assertValue(
   'Missing environment variable: NEXT_PUBLIC_SANITY_PROJECT_ID'
 )
 
-export const useCdn = false //process.env.NODE_ENV === 'production'
+export const useCdn = process.env.NODE_ENV === 'production'
 
 function assertValue<T>(v: T | undefined, errorMessage: string): T {
   if (v === undefined) {

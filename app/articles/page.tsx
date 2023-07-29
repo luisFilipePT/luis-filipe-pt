@@ -2,7 +2,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { cachedClient } from '@/sanity/lib/client'
 import { urlForImage } from '@/sanity/lib/image'
-import { articlesQuery } from '@/sanity/lib/queries'
+import {
+  articlesQuery,
+  navigationQuery,
+  type NavigationQuery,
+} from '@/sanity/lib/queries'
 import { PortableText } from '@portabletext/react'
 import {
   Card,
@@ -15,11 +19,15 @@ import {
 import { Navigation } from '@/components/nav'
 
 export default async function Articles() {
-  const [recentArticle, ...articles] = await cachedClient(articlesQuery)
+  const [articlesList, navigation] = await Promise.all([
+    cachedClient(articlesQuery),
+    cachedClient<NavigationQuery>(navigationQuery),
+  ])
+  const [recentArticle, ...articles] = articlesList
 
   return (
     <main className="relative min-h-screen bg-gradient-to-tl from-zinc-900 via-zinc-400/10 to-zinc-950 pb-16 pt-6 md:pt-1">
-      <Navigation />
+      <Navigation navigation={navigation} />
       <div className="mx-auto max-w-7xl space-y-8 px-6 pt-16 md:space-y-16 md:pt-24 lg:px-8 lg:pt-32">
         <div className="mx-auto max-w-2xl lg:mx-0">
           <h2 className="font-foldit text-8xl tracking-tight text-zinc-100">

@@ -1,7 +1,12 @@
-import { ReactElement } from 'react'
+import { type ReactElement } from 'react'
 import Link from 'next/link'
 import { cachedClient } from '@/sanity/lib/client'
-import { socialsQuery, type SocialsQuery } from '@/sanity/lib/queries'
+import {
+  navigationQuery,
+  socialsQuery,
+  type NavigationQuery,
+  type SocialsQuery,
+} from '@/sanity/lib/queries'
 import { Github, Linkedin, Twitter } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { Navigation } from '@/components/nav'
@@ -13,11 +18,14 @@ const Icons: Record<string, ReactElement> = {
 }
 
 export default async function Contact() {
-  const socials = await cachedClient<SocialsQuery>(socialsQuery)
+  const [socials, navigation] = await Promise.all([
+    cachedClient<SocialsQuery>(socialsQuery),
+    cachedClient<NavigationQuery>(navigationQuery),
+  ])
 
   return (
     <main className="bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0">
-      <Navigation />
+      <Navigation navigation={navigation} />
       <div className="container mx-auto flex min-h-screen items-center justify-center px-4">
         <section className="mx-auto mt-32 grid w-full grid-cols-1 gap-8 sm:mt-0 sm:grid-cols-3 lg:gap-16">
           {socials.map((s) => (

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { type IProject } from '@/sanity/schemas/project'
 import { PortableText } from '@portabletext/react'
 import {
   Card,
@@ -8,7 +9,16 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 
-export function OpenSourceProjectCard({ project }: any) {
+type OpenSourceProjectCard = {
+  project: Readonly<
+    Pick<
+      IProject,
+      '_id' | 'title' | 'subtitle' | 'slug' | 'summary' | 'relevance' | 'url'
+    >
+  >
+}
+
+export function OpenSourceProjectCard({ project }: OpenSourceProjectCard) {
   return (
     <Card>
       <CardHeader>

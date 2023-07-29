@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { type IContribution } from '@/sanity/schemas/contribution'
 import {
   Card,
   CardContent,
@@ -8,7 +9,15 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 
-export function OpenSourceContributionCard({ contribution }: any) {
+type OpenSourceContributionCardProps = {
+  contribution: Readonly<
+    Pick<IContribution, '_id' | 'label' | 'description' | 'logo' | 'link'>
+  >
+}
+
+export function OpenSourceContributionCard({
+  contribution,
+}: OpenSourceContributionCardProps) {
   return (
     <Card>
       <CardHeader>

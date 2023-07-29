@@ -2,7 +2,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { cachedClient } from '@/sanity/lib/client'
 import { urlForImage } from '@/sanity/lib/image'
-import { projectPathsQuery, projectQuery } from '@/sanity/lib/queries'
+import {
+  navigationQuery,
+  projectPathsQuery,
+  projectQuery,
+  type NavigationQuery,
+} from '@/sanity/lib/queries'
 import { PortableText } from '@portabletext/react'
 import { MoveRight } from 'lucide-react'
 import { Navigation } from '@/components/nav'
@@ -13,11 +18,14 @@ export async function generateStaticParams() {
 }
 
 export default async function Article({ params }: { params: any }) {
-  const project = await cachedClient(projectQuery, params)
+  const [project, navigation] = await Promise.all([
+    cachedClient(projectQuery, params),
+    cachedClient<NavigationQuery>(navigationQuery),
+  ])
 
   return (
     <main className="relative flex min-h-screen flex-col bg-gradient-to-tl from-zinc-800 via-zinc-400/10 to-zinc-950">
-      <Navigation fixed={false} />
+      <Navigation navigation={navigation} fixed={false} />
       <div className="flex flex-col items-center justify-evenly px-16 pb-4 pt-16 text-center">
         <h1 className="py-6 text-4xl font-bold tracking-tight text-zinc-100 sm:w-2/3 sm:text-6xl">
           {project.title}
@@ -44,7 +52,7 @@ export default async function Article({ params }: { params: any }) {
               src={urlForImage(project.image)?.url()}
               fill={true}
               priority
-              alt={project?.image?.alt || 'Project website screenshot'}
+              alt={project.image?.alt || 'Project website screenshot'}
             />
           </div>
         ) : null}

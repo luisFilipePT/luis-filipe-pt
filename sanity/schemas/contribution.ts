@@ -1,5 +1,14 @@
 import { defineField, defineType } from 'sanity'
 
+export interface IContribution {
+  _id: string
+  _type: 'contribution'
+  label: string
+  description: string
+  logo: string
+  link: string
+}
+
 export default defineType({
   name: 'contribution',
   title: 'Contribution',

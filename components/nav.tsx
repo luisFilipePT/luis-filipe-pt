@@ -2,15 +2,19 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import { siteConfig } from '@/siteConfig'
+import { NavigationQuery } from '@/sanity/lib/queries'
 import { ArrowLeft } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { capitalize, cn, sortNavigation } from '@/lib/utils'
 
 type NavigationProps = {
+  navigation: NavigationQuery
   fixed?: boolean
 }
 
-export const Navigation: React.FC<NavigationProps> = ({ fixed = true }) => {
+export const Navigation: React.FC<NavigationProps> = ({
+  fixed = true,
+  navigation = [],
+}) => {
   const ref = useRef<HTMLElement>(null)
   const [isIntersecting, setIntersecting] = useState(true)
 
@@ -36,13 +40,13 @@ export const Navigation: React.FC<NavigationProps> = ({ fixed = true }) => {
       <div className={cn(fixed ? fixedClasses : '')}>
         <div className="container mx-auto flex flex-row-reverse items-center justify-between p-6 text-sm sm:text-base">
           <div className="flex justify-between gap-4 text-zinc-300 md:gap-8">
-            {siteConfig.navigation.map((item) => (
+            {navigation.sort(sortNavigation).map(({ slug }) => (
               <Link
-                key={item.href}
-                href={item.href}
+                key={slug}
+                href={slug}
                 className="duration-200 hover:text-zinc-100"
               >
-                {item.name}
+                {capitalize(slug)}
               </Link>
             ))}
           </div>

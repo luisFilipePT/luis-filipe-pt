@@ -51,15 +51,18 @@ export const metadata: Metadata = {
   },
 }
 
-const nunitoSans = Nunito_Sans({ subsets: ['latin'] })
+const nunitoSans = Nunito_Sans({ subsets: ['latin'], display: 'swap' })
 const foldit = Foldit({
   subsets: ['latin'],
+  style: ['normal'],
+  display: 'swap',
   variable: '--font-foldit',
 })
 
 const calSans = LocalFont({
   src: '../public/fonts/CalSans-SemiBold.ttf',
   variable: '--font-calsans',
+  display: 'swap',
 })
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -76,7 +79,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <Script
         src="https://beamanalytics.b-cdn.net/beam.min.js"
         data-token={process.env.BEAM_API_TOKEN}
-        async
+        async // TODO: replace with strategy? https://nextjs.org/docs/app/api-reference/components/script#props
       />
       <body
         className={cn(

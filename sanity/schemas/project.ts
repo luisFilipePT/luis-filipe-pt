@@ -1,4 +1,35 @@
-import { defineArrayMember, defineField, defineType } from 'sanity'
+import {
+  defineArrayMember,
+  defineField,
+  defineType,
+  PortableTextBlock,
+} from 'sanity'
+
+export interface IProject {
+  _id: string
+  _type: 'project'
+  title: string
+  subtitle: string
+  url: string
+  image: {
+    alt: string
+    caption: string
+    url: string
+    asset: {
+      _ref: string
+      _type: 'reference'
+      metadata: {
+        lqip: string
+      }
+    }
+  }
+  summary: PortableTextBlock[]
+  slug: {
+    current: string
+  }
+  relevance: number
+  type: 'work' | 'creation'
+}
 
 export default defineType({
   name: 'project',
