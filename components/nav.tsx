@@ -43,6 +43,7 @@ export const Navigation: React.FC<NavigationProps> = ({
             {navigation.sort(sortNavigation).map(({ slug }) => (
               <Link
                 key={slug}
+                aria-label={`Go to ${slug} page`}
                 href={`/${slug}`}
                 className="duration-200 hover:text-zinc-100"
               >
@@ -51,6 +52,7 @@ export const Navigation: React.FC<NavigationProps> = ({
             ))}
           </div>
           <Link
+            aria-label="Go to home page"
             href="/"
             className="text-zinc-200 duration-200 hover:text-zinc-100"
           >
