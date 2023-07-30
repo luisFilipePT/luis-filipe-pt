@@ -43,7 +43,7 @@ export const Navigation: React.FC<NavigationProps> = ({
             {navigation.sort(sortNavigation).map(({ slug }) => (
               <Link
                 key={slug}
-                href={slug}
+                href={`/${slug}`}
                 className="duration-200 hover:text-zinc-100"
               >
                 {capitalize(slug)}

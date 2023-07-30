@@ -1,4 +1,5 @@
 import { type ReactElement } from 'react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { cachedClient } from '@/sanity/lib/client'
 import {
@@ -7,9 +8,20 @@ import {
   type NavigationQuery,
   type SocialsQuery,
 } from '@/sanity/lib/queries'
-import { Github, Linkedin, Twitter } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { Navigation } from '@/components/nav'
+
+const Github = dynamic(() => import('lucide-react').then((mod) => mod.Github), {
+  ssr: false,
+})
+const Twitter = dynamic(
+  () => import('lucide-react').then((mod) => mod.Twitter),
+  { ssr: false }
+)
+const Linkedin = dynamic(
+  () => import('lucide-react').then((mod) => mod.Linkedin),
+  { ssr: false }
+)
 
 const Icons: Record<string, ReactElement> = {
   github: <Github size={20} />,
