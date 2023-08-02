@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { NavigationQuery } from '@/sanity/lib/queries'
-import { ArrowLeft } from 'lucide-react'
+import { Home } from 'lucide-react'
 import { capitalize, cn, sortNavigation } from '@/lib/utils'
 
 type NavigationProps = {
@@ -39,13 +39,13 @@ export const Navigation: React.FC<NavigationProps> = ({
     <header ref={ref}>
       <div className={cn(fixed ? fixedClasses : '')}>
         <div className="container mx-auto flex flex-row-reverse items-center justify-between p-6 text-sm sm:text-base">
-          <div className="flex justify-between gap-4 text-zinc-300 md:gap-8">
+          <div className="group flex justify-between gap-4 text-zinc-200 md:gap-8">
             {navigation.sort(sortNavigation).map(({ slug }) => (
               <Link
                 key={slug}
                 aria-label={`Go to ${slug} page`}
                 href={`/${slug}`}
-                className="duration-200 hover:text-zinc-100"
+                className="duration-200 hover:!text-zinc-200 group-hover:text-zinc-400"
               >
                 {capitalize(slug)}
               </Link>
@@ -56,7 +56,7 @@ export const Navigation: React.FC<NavigationProps> = ({
             href="/"
             className="text-zinc-200 duration-200 hover:text-zinc-100"
           >
-            <ArrowLeft className="h-6 w-6" />
+            <Home className="h-6 w-6" />
           </Link>
         </div>
       </div>
