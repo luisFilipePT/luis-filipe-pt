@@ -1,4 +1,5 @@
 import { defineField, defineType, PortableTextBlock } from 'sanity'
+import type { Rule } from 'sanity'
 
 export interface IOpenSection {
   _id: string
@@ -26,6 +27,7 @@ export const openSection = defineType({
       title: 'Content',
       name: 'content',
       type: 'array',
+      // @ts-expect-error - typing mismatch between sanity and @sanity-typed
       of: [{ type: 'block' }],
     }),
     defineField({
@@ -35,6 +37,7 @@ export const openSection = defineType({
       options: {
         hotspot: true,
       },
+      // @ts-expect-error - typing mismatch between sanity and @sanity-typed
       fields: [
         {
           title: 'Alt Text',

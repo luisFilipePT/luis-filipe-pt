@@ -4,6 +4,7 @@ import {
   defineType,
   PortableTextBlock,
 } from 'sanity'
+import type { Rule } from 'sanity'
 
 export interface IProject {
   _id: string
@@ -65,6 +66,7 @@ export default defineType({
       title: 'Summary',
       description: 'A short summary of the project shown in the project list',
       type: 'array',
+      // @ts-expect-error - typing mismatch between sanity and @sanity-typed
       of: [
         defineArrayMember({
           title: 'Block',
@@ -113,7 +115,8 @@ export default defineType({
       description:
         'A longer description of the project shown on the project page',
       type: 'array',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule: Rule) => Rule.required(),
+      // @ts-expect-error - typing mismatch between sanity and @sanity-typed
       of: [
         defineArrayMember({
           title: 'Block',
@@ -159,7 +162,7 @@ export default defineType({
       options: {
         list: ['work', 'contribution', 'creation'],
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule: Rule) => Rule.required(),
     }),
     defineField({
       title: 'Relevance score',
@@ -168,7 +171,7 @@ export default defineType({
       name: 'relevance',
       type: 'number',
       initialValue: 0,
-      validation: (Rule) => Rule.required().positive().integer().min(0).max(10),
+      validation: (Rule: Rule) => Rule.required().positive().integer().min(0).max(10),
     }),
   ],
 })

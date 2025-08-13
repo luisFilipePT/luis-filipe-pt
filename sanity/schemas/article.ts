@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
+import type { Rule } from 'sanity'
 
 export default defineType({
   name: 'article',
@@ -9,19 +10,20 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule: Rule) => Rule.required(),
     }),
     defineField({
       name: 'subTitle',
       title: 'Subtitle',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule: Rule) => Rule.required(),
     }),
     defineField({
       name: 'tldr',
       title: 'TL;DR',
       type: 'array',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule: Rule) => Rule.required(),
+      // @ts-expect-error - typing mismatch between sanity and @sanity-typed
       of: [
         defineArrayMember({
           title: 'Block',
@@ -49,7 +51,7 @@ export default defineType({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule: Rule) => Rule.required(),
       options: {
         source: 'title',
         maxLength: 96,
@@ -59,10 +61,11 @@ export default defineType({
       name: 'mainImage',
       title: 'Main image',
       type: 'image',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule: Rule) => Rule.required(),
       options: {
         hotspot: true,
       },
+      // @ts-expect-error - typing mismatch between sanity and @sanity-typed
       fields: [
         {
           name: 'alt',
@@ -75,13 +78,14 @@ export default defineType({
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule: Rule) => Rule.required(),
     }),
     defineField({
       name: 'body',
       title: 'Body',
       type: 'array',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule: Rule) => Rule.required(),
+      // @ts-expect-error - typing mismatch between sanity and @sanity-typed
       of: [
         {
           type: 'block',

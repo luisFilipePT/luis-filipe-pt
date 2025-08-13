@@ -54,7 +54,7 @@ export const metadata: Metadata = {
 const nunitoSans = Nunito_Sans({ subsets: ['latin'], display: 'swap' })
 const foldit = Foldit({
   subsets: ['latin'],
-  style: ['normal'],
+  weight: ['400', '700'],
   display: 'swap',
   variable: '--font-foldit',
 })
