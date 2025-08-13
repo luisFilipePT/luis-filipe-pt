@@ -1,6 +1,6 @@
 import { type ReactElement } from 'react'
-import dynamic from 'next/dynamic'
 import Link from 'next/link'
+import { Github, Twitter, Linkedin } from 'lucide-react'
 import { cachedClient } from '@/sanity/lib/client'
 import {
   navigationQuery,
@@ -11,17 +11,6 @@ import {
 import { Card } from '@/components/ui/card'
 import { Navigation } from '@/components/nav'
 
-const Github = dynamic(() => import('lucide-react').then((mod) => mod.Github), {
-  ssr: false,
-})
-const Twitter = dynamic(
-  () => import('lucide-react').then((mod) => mod.Twitter),
-  { ssr: false }
-)
-const Linkedin = dynamic(
-  () => import('lucide-react').then((mod) => mod.Linkedin),
-  { ssr: false }
-)
 
 const Icons: Record<string, ReactElement> = {
   github: <Github size={20} />,
@@ -41,7 +30,7 @@ export default async function Contact() {
       <div className="container mx-auto flex min-h-screen items-center justify-center px-4">
         <section className="mx-auto mt-32 grid w-full grid-cols-1 gap-8 sm:mt-0 sm:grid-cols-3 lg:gap-16">
           {socials.map((s) => (
-            <Card>
+            <Card key={s._id}>
               <Link
                 href={s.link}
                 target="_blank"

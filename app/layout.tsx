@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     template: '%s | luisfilipept.com',
   },
   description: 'Staff engineer at xgeeks.io and open source contributor',
+  metadataBase: new URL('https://luisfilipept.com'),
   openGraph: {
     title: 'luisfilipept.com',
     description: 'Staff engineer at xgeeks.io and open source contributor',
