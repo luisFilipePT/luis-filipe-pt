@@ -10,20 +10,19 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (Rule: Rule) => Rule.required(),
+      validation: rule => rule.required()
     }),
     defineField({
       name: 'subTitle',
       title: 'Subtitle',
       type: 'string',
-      validation: (Rule: Rule) => Rule.required(),
+      validation: rule => rule.required(),
     }),
     defineField({
       name: 'tldr',
       title: 'TL;DR',
       type: 'array',
-      validation: (Rule: Rule) => Rule.required(),
-      // @ts-expect-error - typing mismatch between sanity and @sanity-typed
+      validation: rule => rule.required(),
       of: [
         defineArrayMember({
           title: 'Block',
@@ -51,7 +50,7 @@ export default defineType({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      validation: (Rule: Rule) => Rule.required(),
+      validation: rule => rule.required(),
       options: {
         source: 'title',
         maxLength: 96,
@@ -61,11 +60,10 @@ export default defineType({
       name: 'mainImage',
       title: 'Main image',
       type: 'image',
-      validation: (Rule: Rule) => Rule.required(),
+      validation: rule => rule.required(),
       options: {
         hotspot: true,
       },
-      // @ts-expect-error - typing mismatch between sanity and @sanity-typed
       fields: [
         {
           name: 'alt',
@@ -78,14 +76,13 @@ export default defineType({
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
-      validation: (Rule: Rule) => Rule.required(),
+      validation: rule => rule.required(),
     }),
     defineField({
       name: 'body',
       title: 'Body',
       type: 'array',
-      validation: (Rule: Rule) => Rule.required(),
-      // @ts-expect-error - typing mismatch between sanity and @sanity-typed
+      validation: rule => rule.required(),
       of: [
         {
           type: 'block',
