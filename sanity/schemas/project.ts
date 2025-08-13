@@ -4,7 +4,6 @@ import {
   defineType,
   PortableTextBlock,
 } from 'sanity'
-import type { Rule } from 'sanity'
 
 export interface IProject {
   _id: string
@@ -66,14 +65,13 @@ export default defineType({
       title: 'Summary',
       description: 'A short summary of the project shown in the project list',
       type: 'array',
-      // @ts-expect-error - typing mismatch between sanity and @sanity-typed
       of: [
         defineArrayMember({
           title: 'Block',
           type: 'block',
           // Styles let you define what blocks can be marked up as. The default
           // set corresponds with HTML tags, but you can set any title or value
-          // you want, and decide how you want to deal with it where you want to
+          // you want and decide how you want to deal with it where you want to
           // use your content.
           styles: [
             { title: 'Normal', value: 'normal' },
@@ -115,8 +113,7 @@ export default defineType({
       description:
         'A longer description of the project shown on the project page',
       type: 'array',
-      validation: (Rule: Rule) => Rule.required(),
-      // @ts-expect-error - typing mismatch between sanity and @sanity-typed
+      validation: rule => rule.required(),
       of: [
         defineArrayMember({
           title: 'Block',
@@ -162,7 +159,7 @@ export default defineType({
       options: {
         list: ['work', 'contribution', 'creation'],
       },
-      validation: (Rule: Rule) => Rule.required(),
+      validation: rule => rule.required(),
     }),
     defineField({
       title: 'Relevance score',
@@ -171,7 +168,7 @@ export default defineType({
       name: 'relevance',
       type: 'number',
       initialValue: 0,
-      validation: (Rule: Rule) => Rule.required().positive().integer().min(0).max(10),
+      validation: rule => rule.required().positive().integer().min(0).max(10),
     }),
   ],
 })

@@ -5,7 +5,6 @@ import {
   defineType,
   PortableTextBlock,
 } from 'sanity'
-import type { Rule } from 'sanity'
 
 export interface IPage {
   _id: string
@@ -35,7 +34,7 @@ export default defineType({
       description:
         'Not displayed in the website but used for Navigation, SEO (metadata) and Studio purposes.',
       type: 'string',
-      validation: (Rule: Rule) => Rule.required(),
+      validation: rule => rule.required(),
     }),
     defineField({
       name: 'title',
@@ -48,7 +47,6 @@ export default defineType({
       title: 'Description',
       description: 'Optional. Not used in all pages.',
       type: 'array',
-      // @ts-expect-error - typing mismatch between sanity and @sanity-typed
       of: [
         defineArrayMember({
           title: 'Block',
@@ -111,7 +109,6 @@ export default defineType({
       options: {
         hotspot: true,
       },
-      // @ts-expect-error - typing mismatch between sanity and @sanity-typed
       fields: [
         {
           title: 'Alt Text',
